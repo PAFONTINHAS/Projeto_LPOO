@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/coordenador/curriculos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <title>Gerenciar Cursos e Currículos</title>
+</head>
+<body>
+
+    <header>
+        <div class="header-esquerdo">
+            <img class="imagem" src="../../images/logo_ufpr.png" alt="" class="logo">
+        </div>
+        
+        <div class="header-centro">
+            <div class="cards-header">
+                <div class="card-header textCenter translate120 cinza-escuro">
+                    <a href="./cursos.html"><p>1. Gerenciar Cursos</p></a>
+                </div>
+                <div class="card-header textCenter translate90 azul">
+                    <a href="./curriculos.html"><p>2. Gerenciar Currículos</p></a>
+                </div>
+                <div class="card-header textCenter translate60 cinza-claro">
+                    <p>3. Gerenciar UCs</p>
+                </div>
+                <div class="card-header textCenter translate30 branco">
+                    <p>4. Gerenciar Alunos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-direito">
+            <button>Sair</button>
+            <button>Perfil</button>
+        </div>
+    </header>
+
+    <div class="titulo">
+        <h1>Gerenciar Currículos</h1>
+        <p>*O curso vinculado é definido automaticamente</p>
+    </div>
+
+    <div class="container">
+
+        <form action="" method="post">
+
+            <div class="first-section">
+
+                <div class="input_group">
+                    <label for="codigo">Código do Curso:</label>
+                    <input class="input_style" type="text" name="codigo" id="" placeholder="EX: TADS001" required>
+                </div>
+
+                <div class="input_group grow">
+                
+                    <label for="nome">Curso Vinculado:</label>
+                    <input class="input_style" type="text" name="nome" id="" placeholder="VINCULADO AUTOMATICAMENTE" required disabled>
+                </div>
+                <div class="input_group">
+                    <label for="coordenador">Versão do Currículo</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="Ex: 01.2024" required>
+                </div>
+                <div class="input_group">
+                    <label for="coordenador">Ano de Implantação</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="Ex: 2024" required>
+                </div>
+                <div class="input_group grow">
+                    <label for="coordenador">Portaria de Aprovação</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="Ex: Portaria n°123/2024" required>
+                </div>
+
+            </div>
+
+            <h2 class="ch">Carga Horária(CH): </h2>
+
+            <div class="second-section">
+
+                <div class="input_group">
+                    <label for="codigo">CH Obrigatória</label>
+                    <input class="input_style" type="text" name="codigo" id="" placeholder="EX: TADS001" required>
+                </div>
+
+                <div class="input_group grow">
+                
+                    <label for="nome">CH Optativas:</label>
+                    <input class="input_style" type="text" name="nome" id="" placeholder="Digite o código do curso"  required>
+                </div>
+                <div class="input_group">
+                    <label for="coordenador">CH Atividades Formativas</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="Ex: 01.2024" >
+                </div>
+                <div class="input_group">
+                    <label for="coordenador">CH de Extensão</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="Ex: 2024" >
+                </div>
+                <div class="input_group grow">
+                    <label for="coordenador">CH total</label>
+                    <input class="input_style" type="text" name="coordenador" id="" placeholder="CALCULADO AUTOMATICAMENTE" disabled>
+                </div>
+
+            </div>
+
+            <div class="third-section">
+
+                <div class="input_group">
+
+                    <label for="codigo">TCC Obrigatório?</label>
+
+                    <div class="input-group">
+                        <input type="radio" name="obrigatorio" id="sim" checked>
+                        <label for="sim">Sim</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="radio" name="obrigatorio" id="nao">
+                        <label for="nao">Não</label>
+                    </div>
+                </div>
+
+                <div class="input_group grow">
+
+                    <label for="nome">Observações:</label>
+                    <textarea name="" id=""></textarea>
+                </div>
+        
+            </div>
+
+         
+
+            <div class="buttons">
+                <button class="vermelho"><a href="">Cancelar</a></button>
+                <button type="submit">Salvar</button>
+            </div>
+        </form>
+
+    </div>
+    
+</body>
+</html>
