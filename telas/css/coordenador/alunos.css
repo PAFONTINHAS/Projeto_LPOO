@@ -14,7 +14,7 @@ a{
     color: black;
 }
 
-.branco{
+.textoBranco{
     color: white;
 }
 
@@ -37,7 +37,7 @@ a{
 
 .branco{
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 4;
 }
 
 .vermelho{
@@ -117,146 +117,151 @@ header{
 }
 
 
+.container{
 
-.titulo{
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-    width: 100%;
-    align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    align-items: center;
+    margin-top: 30px;
 }
 
-.container{
+.card-cadastro{
     display: flex;
+    background-color: #E9E3E3;  
     justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height: 100%;
+    width: 70%;
+    height: 300px;
+    border-radius: 10px;
 }
 
 form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-
-.first-section, .second-section, .third-section{
-    display: flex;
-    flex-direction: row;
+    align-items: flex-start;
+    font-size: 1rem;
     width: 100%;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-
-.third-section{
-
-    justify-content: start;
-    margin-top: 20px;
-}
-
-
-.requisitos{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    gap: 10px;
-}
-
-.adicionar-requisito{
-    display: flex;
-    align-items: center;
     gap: 20px;
 }
 
-.adicionar{
-    font-size: 0.9rem;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.pre-requisitos{
-    margin-top: 30px;
-    margin-bottom: 10px;
-    color: white;
-    justify-self: start;
-    align-self: flex-start;
-}
-
-.card-requisitos{
-
-    background-color: #D9D9D9;
-    border: 2px solid #3CA1E9;
-    border-radius: 20px;
-    height: 150px;
-    opacity: 62%;
-
-}
-
-.labelUnidade{
-    color: white;
-    padding-right: 10px;
-}
-
-.tipoUnidade{
-    height: 30px;
-    width: 120px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-}   
-
-textarea{
-    width: 100vh;
-    height: 100px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-
-}
-
-input{
-    padding: 10px;
-}
-
-
-.input_group{
-    font-size: 1.2rem;
+.linha{
     display: flex;
-    color: white;
-    flex-direction: column;
-    gap: 15px;
+    margin-left: 30px;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+
 }
 
-
-.input_style{
-
-    border: 2px solid #3CA1E9;
-    height: 30px;
-    border-radius: 10px;
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .grow{
     width: 300px;
 }
 
-.buttons{
-    width: 100%;
+.botao{
+    align-self: end;
+    padding-right: 50px;
+}
+
+input{
+    border-radius: 5px;
+    border: 2px solid #3CA1E9;
+    height: 25px;
+    padding: 10px;
+
+}
+
+.select-group{
     display: flex;
-    align-items: end;
-    justify-content: end;
-    gap: 20px;
+    gap: 10px;
 }
 
-button{
-    padding: 15px;
+select{
+    background-color: white;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #160EA2;
+}
+
+.botao button{
+    font-size: 1rem;
+    padding: 10px;
     border-radius: 15px;
-    font-size: 1.2rem;
+    background-color: #1F18AB;
     border: none;
+    color: white;
 }
 
+
+.tabela{
+
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    align-items: center;
+    margin-top: 30px;
+    width: 50%;
+}
+
+
+.titulo-tabela{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-tabela h3{
+    align-self: start;
+    margin-left: 20px;
+}
+
+div.alunos{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 10px;
+    padding: 10px;
+}
+
+div.aluno{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: #D9D9D9;
+    border-radius: 50px;
+}
+
+.acaoAluno button{
+    color: white;
+    font-size: 1rem;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+
+}
+
+.infoAluno{
+    display: flex;
+    gap: 5px;
+}
+
+.editar{
+    background-color: #efb907;
+}
+.deletar{
+    background-color: #FF0000;
+}
