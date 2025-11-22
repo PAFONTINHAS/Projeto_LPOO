@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Novo Processo Avaliativo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/coordenador/novo-processo1.css">
+    <link rel="stylesheet" href="../../css/coordenador/novo-processo2.css">
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-
+    <script src="../../js/suggetion-list.js"></script>
+    <title>Novo Processo Avaliativo</title>
 </head>
 <body>
 
+    
     <header>
         <div class="header-esquerdo">
             <img class="imagem" src="../../images/logo_ufpr.png" alt="" class="logo">
@@ -39,45 +40,41 @@
     </header>
 
 
-<div class="container">
-    <div class="cards">
+    <div class="container">
 
-        <p class="titulo-card">Novo Processo Avaliativo</p>
-
-        <div class="campo">
-            <label for="titulo">Título</label>
-            <input type="text" name="titulo">
-        </div>
-
-        <div class="campo">
-            <label for="periodo">Período:</label>
-        </div>
-
-        <div class="input-data">
-            <div class="campo">
-                <label for="inicio">Início:</label>
-                <input type="date" name="inicio">
+        <div class="content">
+            <div class="titulo">
+                <h1>Novo Processo Avaliativo</h1>
+                <p>2/4</p>
             </div>
+    
+            <div class="card">
+    
+                <!-- <div class="input-group">
+                    <label for="cursos"> Cursos Participantes</label>
+                    <input type="text" name="" id="">
+                </div> -->
 
-            <div class="campo">
-                <label for="fim">Fim:</label>
-                <input type="date" name="fim">
+                <div class="main-widget-container">
+                    <label for="cursos">Cursos Participantes</label>
+                    <div class="tag-input-wrapper">
+                        <ul id="tags-container"></ul>
+    
+                        <input type="text" name="" id="tag-input" placeholder="Adicione tags">
+                    </div>
+    
+                    <ul id="suggestions-list"></ul>
+                </div>
+    
+                <div class="botoes">
+    
+                    <button type="button" class="cancelar">Cancelar</button>
+                    <button type="button" class="prosseguir"><a href="./novo-processo3.html">Prosseguir</a></button>
+                </div>
             </div>
         </div>
 
-        <div class="campo">
-            <label for="observacoes">Observações (opcional):</label>
-            <textarea name="observacoes"></textarea>
-        </div>
-
-        <div class="botoes">
-            <button class="cancelar"> Cancelar</button>
-            <button class="prosseguir"><a href="./novo-processo2.html">Prosseguir</a></button>
-        </div>
 
     </div>
-</div>
-
-    
 </body>
 </html>
