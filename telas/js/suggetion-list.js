@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const suggestionsList = document.getElementById('suggestions-list');
 
     const availableSuggestions = [
-        'HTML', 'CSS', 'JavaScript', 'React', 'Vue', 'Angular',
-        'Node.js', 'Python', 'PHP', 'Ruby', 'SQL', 'MongoDB',
-        'Design Responsivo', 'UX/UI'
+        'Administração', 'Análise e Desenvolvimento de Sistemas', 'Agronomia', 'Direito', 'Secretariado',
     ];
 
 
