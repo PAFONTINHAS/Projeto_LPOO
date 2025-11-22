@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gabarito', sans-serif;
+}
+
+body {
+    background-color: #0351A6;
+}
+
+/* header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #D9D9D9;
+    padding: 15px 30px;
+}
+
+.imagem {
+    height: 80px;
+}
+
+/* container central */
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.cards {
+    background: white;
+    width: 400px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Título */
+.titulo-card {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Campos do formulário */
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #9EC5E8;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+textarea {
+    height: 90px;
+    resize: none;
+}
+
+/* Inputs de início e fim */
+.input-data {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* Botões */
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.cancelar {
+    width: 48%;
+    background: #EB5757;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.prosseguir {
+    width: 48%;
+    background: #2F80ED;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancelar:hover,
+.prosseguir:hover {
+    opacity: 0.85;
+}
