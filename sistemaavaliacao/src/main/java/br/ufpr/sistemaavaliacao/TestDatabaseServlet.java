@@ -17,6 +17,9 @@ import br.ufpr.sistemaavaliacao.dao.ConnectionFactory;
 /**
  * Servlet para testar a conexão com o banco de dados MySQL.
  * 
+ * AVISO: Este servlet é APENAS para desenvolvimento e testes.
+ * NÃO use em ambiente de produção pois exibe informações de diagnóstico.
+ * 
  * Acesse: http://localhost:8080/sistemaavaliacao/test-db
  * 
  * Esta página mostra:
@@ -26,6 +29,19 @@ import br.ufpr.sistemaavaliacao.dao.ConnectionFactory;
  */
 @WebServlet("/test-db")
 public class TestDatabaseServlet extends HttpServlet {
+
+    /**
+     * Sanitiza texto para evitar XSS (Cross-Site Scripting)
+     */
+    private String escapeHtml(String text) {
+        if (text == null) return "";
+        return text
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -65,25 +81,25 @@ public class TestDatabaseServlet extends HttpServlet {
                 DatabaseMetaData metaData = conn.getMetaData();
                 out.println("<div class='info'>");
                 out.println("<h3>📊 Informações do Banco de Dados</h3>");
-                out.println("<p><strong>URL:</strong> " + metaData.getURL() + "</p>");
-                out.println("<p><strong>Usuário:</strong> " + metaData.getUserName() + "</p>");
-                out.println("<p><strong>Produto:</strong> " + metaData.getDatabaseProductName() + " " + metaData.getDatabaseProductVersion() + "</p>");
-                out.println("<p><strong>Driver:</strong> " + metaData.getDriverName() + " " + metaData.getDriverVersion() + "</p>");
+                out.println("<p><strong>URL:</strong> " + escapeHtml(metaData.getURL()) + "</p>");
+                out.println("<p><strong>Usuário:</strong> " + escapeHtml(metaData.getUserName()) + "</p>");
+                out.println("<p><strong>Produto:</strong> " + escapeHtml(metaData.getDatabaseProductName()) + " " + escapeHtml(metaData.getDatabaseProductVersion()) + "</p>");
+                out.println("<p><strong>Driver:</strong> " + escapeHtml(metaData.getDriverName()) + " " + escapeHtml(metaData.getDriverVersion()) + "</p>");
                 out.println("</div>");
 
                 // Lista tabelas
-                out.println("<h3>📋 Tabelas no Banco de Dados 'avaliaufpr'</h3>");
+                out.println("<h3>📋 Tabelas no Banco de Dados '" + escapeHtml(ConnectionFactory.DATABASE_NAME) + "'</h3>");
                 out.println("<table>");
                 out.println("<tr><th>#</th><th>Nome da Tabela</th><th>Tipo</th></tr>");
 
-                ResultSet tables = metaData.getTables("avaliaufpr", null, "%", new String[]{"TABLE"});
+                ResultSet tables = metaData.getTables(ConnectionFactory.DATABASE_NAME, null, "%", new String[]{"TABLE"});
                 int count = 0;
                 while (tables.next()) {
                     count++;
                     out.println("<tr>");
                     out.println("<td>" + count + "</td>");
-                    out.println("<td>" + tables.getString("TABLE_NAME") + "</td>");
-                    out.println("<td>" + tables.getString("TABLE_TYPE") + "</td>");
+                    out.println("<td>" + escapeHtml(tables.getString("TABLE_NAME")) + "</td>");
+                    out.println("<td>" + escapeHtml(tables.getString("TABLE_TYPE")) + "</td>");
                     out.println("</tr>");
                 }
                 tables.close();
@@ -96,11 +112,15 @@ public class TestDatabaseServlet extends HttpServlet {
                 out.println("<p><strong>Total de tabelas:</strong> " + count + "</p>");
             }
         } catch (SQLException e) {
+            // Log do erro no servidor para administradores
+            System.err.println("Erro de conexão com banco de dados: " + e.getMessage());
+            
             out.println("<p class='error'>❌ <strong>Erro na conexão!</strong></p>");
             out.println("<div class='info' style='background: #ffe6e6;'>");
-            out.println("<h3>⚠️ Detalhes do Erro</h3>");
-            out.println("<p><strong>Mensagem:</strong> " + e.getMessage() + "</p>");
-            out.println("<p><strong>Código SQL:</strong> " + e.getSQLState() + "</p>");
+            out.println("<h3>⚠️ Detalhes do Erro (somente desenvolvimento)</h3>");
+            // Sanitização das mensagens para evitar XSS
+            out.println("<p><strong>Mensagem:</strong> " + escapeHtml(e.getMessage()) + "</p>");
+            out.println("<p><strong>Código SQL:</strong> " + escapeHtml(e.getSQLState()) + "</p>");
             out.println("<p><strong>Código Erro:</strong> " + e.getErrorCode() + "</p>");
             out.println("</div>");
 

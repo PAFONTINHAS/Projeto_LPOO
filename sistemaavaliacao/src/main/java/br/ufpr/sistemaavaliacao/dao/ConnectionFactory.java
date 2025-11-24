@@ -10,12 +10,22 @@ import java.sql.SQLException;
  * CONFIGURAÇÃO:
  * Antes de usar, certifique-se de que o MySQL está instalado e configurado.
  * Veja o arquivo README_DATABASE.md para instruções completas.
+ * 
+ * NOTA DE SEGURANÇA:
+ * - Em ambiente de produção, use variáveis de ambiente para as credenciais
+ * - Em ambiente de produção, habilite SSL (useSSL=true)
+ * - Este arquivo está configurado para facilitar o desenvolvimento local
  */
 public class ConnectionFactory {
 
+    // Nome do banco de dados - usado pela aplicação
+    public static final String DATABASE_NAME = "avaliaufpr";
+
     // Configurações de conexão - MODIFIQUE conforme seu ambiente
-    private static final String URL = "jdbc:mysql://localhost:3306/avaliaufpr?useSSL=false&serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true";
+    // NOTA: useSSL=false é aceitável para desenvolvimento local, mas em produção habilite SSL
+    private static final String URL = "jdbc:mysql://localhost:3306/" + DATABASE_NAME + "?useSSL=false&serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true";
     private static final String USUARIO = "root";
+    // IMPORTANTE: Configure sua senha aqui. Em produção, use variáveis de ambiente.
     private static final String SENHA = "";  // Coloque sua senha do MySQL aqui
 
     static {
