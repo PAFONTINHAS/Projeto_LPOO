@@ -1,1 +1,3 @@
+br\ufpr\sistemaavaliacao\testes\TesteConexao.class
 br\ufpr\sistemaavaliacao\HelloServlet.class
+br\ufpr\sistemaavaliacao\config\ConnectionFactory.class
