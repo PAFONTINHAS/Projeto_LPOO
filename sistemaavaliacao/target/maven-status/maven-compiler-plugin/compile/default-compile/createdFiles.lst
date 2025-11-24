@@ -1,1 +1,3 @@
-br\ufpr\sistemaavaliacao\HelloServlet.class
+br/ufpr/sistemaavaliacao/dao/ConexaoDAO.class
+br/ufpr/sistemaavaliacao/HelloServlet.class
+br/ufpr/sistemaavaliacao/TestarConexaoServlet.class
