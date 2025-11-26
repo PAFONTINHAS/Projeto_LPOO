@@ -2,5 +2,7 @@
 <html>
 <body>
 <h2>Hello World! Jonas</h2>
+
+<a href="basico.jsp"> basico.jsp </a>
 </body>
 </html>
