@@ -1,7 +1,0 @@
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/HelloServlet.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/config/ConnectionFactory.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/controller/QuestaoCriarServlet.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/dao/QuestaoAbDAO.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/dao/TurmaDAO.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/dao/UnidadeCurricularDAO.java
-/home/runner/work/Projeto_LPOO/Projeto_LPOO/sistemaavaliacao/src/main/java/br/ufpr/sistemaavaliacao/testes/TesteConexao.java
