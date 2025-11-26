@@ -12,24 +12,55 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Aluno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aluno/home.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit_square" />
+    
+    <title>Pesquisas</title>
 </head>
 <body>
+
     <header>
-        <nav>
-            <h1>Área do Aluno: ${usuario.nome}</h1>
-            <a href="#">Minhas Avaliações (RF12)</a>
-            <a href="${pageContext.request.contextPath}/LogoutServlet">Sair</a>
-        </nav>
+        <div class="header-esquerdo">
+            <img class="imagem" src="${pageContext.request.contextPath}/images/logo_ufpr.png" alt="" class="logo">
+        </div>
+
+        <div class="header-direito">
+            <button><a style="text-decoration=none" href="${pageContext.request.contextPath}/LogoutServlet">Sair</a></button>
+            <button>Perfil</button>
+        </div>
     </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="titulo-card">
+                <h1>Pesquisas Disponíveis <i class="fa-solid fa-user"></i></h1>
+            </div>
+
+
+            <div class="pesquisas">
+
+                <ul>
+                    <li>
+
+                        <a href="pesquisa.jsp">Avaliação de Ferramentas de IA com Professor X <span class="material-symbols-outlined redirect">edit_square</span></a>
+                    </li>
+
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+
+
     
-    <main>
-        <h2>Avaliações Disponíveis</h2>
-        <p>Acesse aqui os formulários de avaliação das turmas em que você está matriculado (RF12).</p>
-    </main>
 </body>
 </html>

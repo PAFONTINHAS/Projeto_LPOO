@@ -16,13 +16,14 @@ a{
     color: white;
     text-decoration: underline white;
 }
-
-.login-container {
+.container{
+    color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    padding: 30px;
     height: 100vh;
-    background-color: #0351A6; /* Fundo principal */
+    background-color: #0351A6;
 }
 
 .titulo{

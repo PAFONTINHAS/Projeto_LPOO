@@ -16,28 +16,52 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - ${perfil}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/coordenador/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <title>Página Inicial</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <h1>Bem-vindo, ${usuario.nome} (${usuario.perfil})</h1>
-            <a href="${pageContext.request.contextPath}/jsp/coordenador/criar-formulario.jsp">Criar Formulário</a>
-            <a href="${pageContext.request.contextPath}/LogoutServlet">Sair</a>
-        </nav>
-    </header>
-    
-    <main>
-        <h2>Dashboard de ${perfil}</h2>
-        <p>Use o menu para gerenciar processos e formulários de avaliação.</p>
-    </main>
 
-    <footer>
-        <p>&copy; AvaliaUFPR</p>
-    </footer>
+    <header>
+        <div class="header-esquerdo">
+            <img class="imagem" src="../../images/logo_ufpr.png" alt="" class="logo">
+        </div>
+
+        <div class="header-direito">
+            <button>Sair</button>
+            <button>Perfil</button>
+        </div>
+    </header>
+
+    <div class="titulo">
+        <h1>Página Inicial</h1>
+    </div>
+
+    <div class="container">
+
+
+        <div class="cards">
+            <div class="card">
+                <a href="cursos_curriculos.jsp">Gerenciar Cursos e Currículos</a>
+            </div>
+
+            <div class="card">
+                <a href="processos-avaliativos.jsp">Gerenciar Processos Avaliativos</a>
+            </div>
+            <div class="card">
+                <a href="criar-formulario">Gerenciar Formulários</a>
+            </div>
+            <div class="card">
+                <a href="">Relatórios e Dados</a>
+            </div>
+        </div>
+
+    </div>
+    
 </body>
 </html>

@@ -12,23 +12,57 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Professor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/professor/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <title>Página Inicial</title>
 </head>
 <body>
+
     <header>
-        <nav>
-            <h1>Painel do Professor: ${usuario.nome}</h1>
-            <a href="${pageContext.request.contextPath}/LogoutServlet">Sair</a>
-        </nav>
+        <div class="header-esquerdo">
+            <img class="imagem" src="${pageContext.request.contextPath}/images/logo_ufpr.png" alt="" class="logo">
+        </div>
+        
+        <div class="header-centro">
+            <div class="cards-header">
+                <div class="card-header textCenter translate120 azul">
+                    <a href="cursos.jsp"><p>1. Gerenciar Alunos</p></a>
+                </div>
+                <div class="card-header textEnd translate90 cinza-escuro">
+                    <a href="curriculos.jsp"><p>2. Relatórios e Dados</p></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-direito">
+            <button>Sair</button>
+            <button>Perfil</button>
+        </div>
     </header>
+
+    <div class="titulo">
+        <h1>Página Inicial</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="cards">
+            <div class="card">
+                <a href="alunos.jsp">Gerenciar Aluno</a>
+            </div>
+
+            <div class="card">
+                <a href="">Relatório e Dados</a>
+            </div>
+
+        </div>
+
+    </div>
     
-    <main>
-        <h2>Minhas Turmas e Relatórios</h2>
-        <p>Visualize as disciplinas e acesse os relatórios consolidados (RF16, RF19).</p>
-    </main>
 </body>
 </html>

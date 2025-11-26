@@ -12,13 +12,13 @@ header{
     background-color: #D9D9D9 ;
 }
 
-.cadastro-container{
+.container{
     color: white;
     display: flex;
     flex-direction: column;
     padding: 30px;
     height: 100vh;
-    background-color: #0351A6; /* Cor de fundo azul forte */
+    background-color: #0351A6;
 }
 
 .titulo{

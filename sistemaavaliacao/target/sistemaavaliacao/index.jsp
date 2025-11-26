@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
-<head>
-<meta http-equiv="refresh" content="0;url=login.jsp">
-</head>
 <body>
-    <p>Redirecionando para a página de <a href="login.jsp">Login</a>...</p>
+<h2>Hello World! Jonas</h2>
+
+<a href="./views/basico.jsp">
 </body>
 </html>

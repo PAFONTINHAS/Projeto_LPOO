@@ -1,69 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro - AvaliaUFPR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cadastro.css">
+    <title>Cadastro Aluno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="cadastro-container">
-    <div class="cadastro-form">
-        <h2>Cadastro de Novo Usuário (RF01)</h2>
-        
+
+    <header>
+        <img src="../images/logo_ufpr.png" alt="" class="logo">
+    </header>
+
+    <div class="container">
+
+        <div class="titulo">
+            <p class="titulo_cadastro">Cadastre-se</p>
+            
+            <p>Já tem conta? <a href="login.jsp">Faça o login aqui</a></p>
+        </div>
+
         <c:if test="${not empty requestScope.mensagemErro}">
             <p style="color: red; font-weight: bold;">${requestScope.mensagemErro}</p>
         </c:if>
         <c:if test="${not empty requestScope.mensagemSucesso}">
             <p style="color: green; font-weight: bold;">${requestScope.mensagemSucesso}</p>
         </c:if>
+
+
+        <div class="formulario">
+
+            <form action="${pageContext.request.contextPath}/CadastroServlet" method="post">
+                
+                <div class="grupo-esquerdo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" placeholder="Nome completo">
+                    
+                    <label for="email">E-mail:</label>
+                    <input type="email" name="email" placeholder="user@email.com">
+                    
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="senha" placeholder="XXXXXXXXX">
+                    
+                </div>
+                
+                <div class="grupo-direito">
+                    <label for="login">Login:</label>
+                    <input type="text" name="login" placeholder="">
+                    
+                    <label for="perfil">Perfil:</label>
+                    <select name="perfil" id="perfil" onchange="toggleInfoEspecifica()">
+                        <option value="Selecione" selected disabled>Selecione</option>
+                        <option value="aluno">Aluno</option>
+                        <option value="professor">Professor</option>
+                        <option value="coordenador">Coordenador</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+
+                    <div class="input-group" id="infoEspecificaGroup" style="display:none;">
+                        <label for="info_especifica" id="infoEspecificaLabel"></label>
+                        <input type="text" id="info_especifica" name="info_especifica">
+                    </div>
+                    
+                    <div class="input-group" id="departamentoGroup" style="display:none;">
+                        <label for="departamento">Departamento (Opcional)</label>
+                        <input type="text" id="departamento" name="departamento">
+                    </div>
+
+                    <div class="cadastrar">
+                        <button type="submit">Criar Conta</button>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
         
-        <form action="${pageContext.request.contextPath}/CadastroServlet" method="post">
-            <div class="input-group">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required>
-            </div>
-            <div class="input-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-group">
-                <label for="login">Login</label>
-                <input type="text" id="login" name="login" required>
-            </div>
-            <div class="input-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="perfil">Perfil</label>
-                <select id="perfil" name="perfil" required onchange="toggleInfoEspecifica()">
-                    <option value="">-- Selecione o Perfil --</option>
-                    <option value="aluno">Aluno</option>
-                    <option value="professor">Professor</option>
-                    <option value="coordenador">Coordenador</option>
-                    <option value="administrador">Administrador</option>
-                </select>
-            </div>
 
-            <div class="input-group" id="infoEspecificaGroup" style="display:none;">
-                <label for="info_especifica" id="infoEspecificaLabel"></label>
-                <input type="text" id="info_especifica" name="info_especifica">
-            </div>
-            
-            <div class="input-group" id="departamentoGroup" style="display:none;">
-                <label for="departamento">Departamento (Opcional)</label>
-                <input type="text" id="departamento" name="departamento">
-            </div>
-            
-            <button type="submit" class="btn-cadastro">CADASTRAR</button>
-        </form>
-        <p class="link-login"><a href="login.jsp">Já tenho uma conta</a></p>
+        
     </div>
-</div>
-
+    
 <script>
     function toggleInfoEspecifica() {
         const perfil = document.getElementById('perfil').value;

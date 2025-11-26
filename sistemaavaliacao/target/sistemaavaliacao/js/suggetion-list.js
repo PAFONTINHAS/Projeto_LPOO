@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
 
-
     function createTag(label) {
         const li = document.createElement('li');
 
