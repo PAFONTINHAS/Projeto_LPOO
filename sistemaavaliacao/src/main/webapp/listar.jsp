@@ -234,16 +234,16 @@
         <div class="header-centro">
             <div class="cards-header">
                 <div class="card-header textCenter translate120 azul">
-                    <a href="#"><p>1. Cursos</p></a>
+                    <a href="basico.jsp"><p>1. Início</p></a>
                 </div>
                 <div class="card-header textEnd translate90 cinza-escuro">
-                    <a href="#"><p>2. Currículos</p></a>
+                    <a href="listar.jsp"><p>2. Listagem</p></a>
                 </div>
                 <div class="card-header textCenter translate60 cinza-claro">
-                    <p>3. UCs</p>
+                    <a href="selecionar.jsp" class="preto"><p>3. Seleção</p></a>
                 </div>
                 <div class="card-header textCenter translate30 branco">
-                    <p>4. Alunos</p>
+                    <p>4. Configurações</p>
                 </div>
             </div>
         </div>

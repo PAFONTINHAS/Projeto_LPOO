@@ -130,8 +130,9 @@
     <div class="container">
 
         <!-- Exibir mensagens de feedback -->
+        <!-- tipoMensagem pode ser: 'mensagem-sucesso' ou 'mensagem-erro' -->
         <c:if test="${not empty mensagem}">
-            <div class="mensagem ${tipoMensagem}">
+            <div class="mensagem <c:choose><c:when test='${not empty tipoMensagem}'>${tipoMensagem}</c:when><c:otherwise>mensagem-sucesso</c:otherwise></c:choose>">
                 <p>${mensagem}</p>
             </div>
         </c:if>
