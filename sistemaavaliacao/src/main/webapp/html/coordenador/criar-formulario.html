@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/coordenador/criar-formulario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <title>Novo Formulário</title>
+</head>
+<body>
+
+    <header>
+        <div class="header-esquerdo">
+            <img class="imagem" src="../../images/logo_ufpr.png" alt="" class="logo">
+        </div>
+        
+        <div class="header-centro">
+            <div class="cards-header">
+                <div class="card-header textCenter translate120 azul">
+                    <a href="./cursos.html"><p>1. Gerenciar Cursos</p></a>
+                </div>
+                <div class="card-header textEnd translate90 cinza-escuro">
+                    <a href="./curriculos.html"><p>2. Gerenciar Currículos</p></a>
+                </div>
+                <div class="card-header textCenter translate60 cinza-claro">
+                    <p>3. Gerenciar UCs</p>
+                </div>
+                <div class="card-header textCenter translate30 branco">
+                    <p>4. Gerenciar Alunos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-direito">
+            <button>Sair</button>
+            <button>Perfil</button>
+        </div>
+    </header>
+    
+
+
+    <div class="container">
+        <div class="container-filho">
+            <div class="titulos">
+                <h2>Título</h2>
+                <p class="selec-turmas">Professor</p>
+            </div>
+
+            <button class="btn-anonimo">Formulário Anônimo</button>
+            <div class="cards">
+          
+                <div class="card1">
+                    <label for="">Nova Pergunta</label>
+                    <select name="disciplinas[]" multiple size="5">
+                        <option value="res-un">Resposta única</option>
+                        <option value="mult-res">Múltiplas respostas</option>
+                        <option value="res-aberta">Resposta aberta</option>
+                    </select>
+                </div>
+
+                    <div class="card2">
+                        <label for="">Opções</label>
+                        <select name="turmas[]" multiple size="5">
+                            <option value="2op">2 opções</option>
+                            <option value="3op">3 opções</option>
+                            <option value="4op">4 opções</option>
+                            <option value="5op">5 opções</option>
+                        </select>
+                    </div>
+
+                <div class="card3">
+                    <label for="">Obrigatoriedade </label>
+                    <select name="cursos[]" multiple size="5">
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>              
+                </div>
+
+                <div class="card4">
+                    <label for="">Peso</label>
+                    <select name="cursos[]" multiple size="5">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>  
+                    <button class="salvar">Salvar</button>            
+                </div>
+                    
+                <button class="addP">+</button>
+            </div>
+            <div class="prgt-ab">
+                <textarea class="enunciado-ab" id="">Escreva aqui o enunciado da pergunta</textarea>
+                <button class="op1">Opção 1</button>
+                <button class="op2">Opção 2</button>
+                <button class="add-op">Adicionar mais opções</button>
+            </div>
+            <div class="botoes">
+                <button class="cancelar">Cancelar</button>
+                <button class="prosseguir">Prosseguir</button>
+        </div>
+    </div>
+    
+</body>
+</html>

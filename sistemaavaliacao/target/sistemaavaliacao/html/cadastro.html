@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <title>Cadastro Aluno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <img src="../images/logo_ufpr.png" alt="" class="logo">
+    </header>
+
+    <div class="container">
+
+        <div class="titulo">
+            <p class="titulo_cadastro">Cadastre-se</p>
+            
+            <p>Já tem conta? <a href="./login.html">Faça o login aqui</a></p>
+        </div>
+
+
+        <div class="formulario">
+
+            <form action="" method="post">
+                
+                <div class="grupo-esquerdo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" placeholder="Nome completo">
+                    
+                    <label for="email">E-mail:</label>
+                    <input type="email" name="email" placeholder="user@email.com">
+                    
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="senha" placeholder="XXXXXXXXX">
+                    
+                </div>
+                
+                <div class="grupo-direito">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX">
+                    
+                    <label for="perfil">Perfil:</label>
+                    <select name="perfil" id="">
+                        <option value="Selecione" selected disabled>Selecione</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Coordenador">Coordenador</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+
+                    <div class="cadastrar">
+                        <button type="submit">Criar Conta</button>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
+        
+
+        
+    </div>
+    
+    
+</body>
+</html>

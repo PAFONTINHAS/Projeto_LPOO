@@ -3,6 +3,6 @@
 <body>
 <h2>Hello World! Jonas</h2>
 
-<a href="basico.jsp"> basico.jsp </a>
+<a href="./views/basico.jsp">
 </body>
 </html>
