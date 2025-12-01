@@ -40,7 +40,7 @@
         </div>
 
         <div class="header-direito">
-            <button>Sair</button>
+            <button><a href="${pageContext.request.contextPath}/LogoutServlet">Sair</a></button>
             <button>Perfil</button>
         </div>
     </header>

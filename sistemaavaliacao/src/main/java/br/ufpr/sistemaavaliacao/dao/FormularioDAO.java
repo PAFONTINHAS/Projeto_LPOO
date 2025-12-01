@@ -38,10 +38,10 @@ public class FormularioDAO {
                     // a) Inserir em questoes_multipla_escolha (RF08)
                     // ... (Lógica de inserção em questoes_multipla_escolha)
 
-                    // b) Inserir alternativas (loop)
-                    for (Alternativa alternativa : questao.getAlternativas()) {
-                        // ... (Lógica de inserção em alternativas - usa Alternativa.java)
-                    }
+                    // // b) Inserir alternativas (loop)
+                    // for (Alternativa alternativa : questao.getAlternativas()) {
+                    //     // ... (Lógica de inserção em alternativas - usa Alternativa.java)
+                    // }
                 }
             }
 
