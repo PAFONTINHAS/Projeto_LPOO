@@ -29,7 +29,7 @@
 
     <header>
         <div class="header-esquerdo">
-            <img class="imagem" src="../../images/logo_ufpr.png" alt="" class="logo">
+            <img class="imagem" src="${pageContext.request.contextPath}/images/logo_ufpr.png" alt="" class="logo">
         </div>
 
         <div class="header-direito">
@@ -54,7 +54,7 @@
                 <a href="processos-avaliativos.jsp">Gerenciar Processos Avaliativos</a>
             </div>
             <div class="card">
-                <a href="criar-formulario">Gerenciar Formulários</a>
+                <a href="criar-formulario.jsp">Gerenciar Formulários</a>
             </div>
             <div class="card">
                 <a href="">Relatórios e Dados</a>

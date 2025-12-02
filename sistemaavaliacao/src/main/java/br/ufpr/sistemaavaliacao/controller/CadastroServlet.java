@@ -4,10 +4,11 @@ import br.ufpr.sistemaavaliacao.dao.UsuarioDAO;
 import br.ufpr.sistemaavaliacao.model.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 //import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-//@WebServlet("/CadastroServlet")
+@WebServlet("/CadastroServlet")
 public class CadastroServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
