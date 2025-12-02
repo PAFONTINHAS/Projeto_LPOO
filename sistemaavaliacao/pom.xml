@@ -2,34 +2,33 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              https://maven.apache.org/maven-v4_0_0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>br.ufpr.sistemaavaliacao</groupId>
     <artifactId>sistemaavaliacao</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <repositories>
         <repository>
             <id>central2</id>
             <url>https://repo1.maven.org/maven2</url>
         </repository>
-
         <repository>
             <id>jboss</id>
             <url>https://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
-
     <dependencies>
-
+        <!-- JSTL para JSP -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
         <!-- API Servlet para Tomcat 9 (javax.servlet) -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -37,41 +36,29 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- JSTL para uso em JSP -->
+        <!-- MySQL Connector (coordenado correto) -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-        <!-- MySQL Connector (VERSÃO CERTA QUE EXISTE) -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version>
         </dependency>
-
-        <!-- JUnit para testes -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
-
     <build>
         <finalName>sistemaavaliacao</finalName>
-       <plugins>
+        <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
@@ -82,9 +69,9 @@
                 <version>2.2</version>
                 <configuration>
                     <port>8080</port>
-                    <path>/sistemaavaliacao</path> </configuration>
+                    <path>/sistemaavaliacao</path>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
