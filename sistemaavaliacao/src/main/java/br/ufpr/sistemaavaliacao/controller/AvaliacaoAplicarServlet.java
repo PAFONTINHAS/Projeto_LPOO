@@ -1,6 +1,6 @@
 package br.ufpr.sistemaavaliacao.controller;
 
-import br.ufpr.sistemaavaliacao.dao.RespostaDAO;
+import br.ufpr.sistemaavaliacao.config.ConnectionFactory;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
@@ -8,22 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-  //listar e exibir formulários disponíveis para ser respondido
+// Listar e exibir formulários disponíveis para ser respondido
 @WebServlet("/avaliacao/aplicar")
 public class AvaliacaoAplicarServlet extends HttpServlet {
-
-    private Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/avaliaufpr", 
-                "root", 
-                "sua_senha"  // ALTERE AQUI
-            );
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver MySQL não encontrado", e);
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +31,7 @@ public class AvaliacaoAplicarServlet extends HttpServlet {
             return;
         }
 
-        try (Connection conn = getConnection()) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
             
             List<Map<String, Object>> formularios = buscarFormulariosDisponiveis(conn, usuarioId);
             

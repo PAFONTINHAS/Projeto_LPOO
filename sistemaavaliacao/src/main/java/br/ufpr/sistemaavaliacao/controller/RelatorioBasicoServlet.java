@@ -1,5 +1,6 @@
 package br.ufpr.sistemaavaliacao.controller;
 
+import br.ufpr.sistemaavaliacao.config.ConnectionFactory;
 import br.ufpr.sistemaavaliacao.dao.RelatorioDAO;
 import java.io.IOException;
 import java.sql.*;
@@ -8,22 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
- 
 @WebServlet("/relatorio/basico")
 public class RelatorioBasicoServlet extends HttpServlet {
-
-    private Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/avaliaufpr", 
-                "root", 
-                "sua_senha"  // ALTERE AQUI
-            );
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver MySQL não encontrado", e);
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +33,7 @@ public class RelatorioBasicoServlet extends HttpServlet {
         String formularioIdStr = request.getParameter("id");
         if (formularioIdStr == null) {
             
-            try (Connection conn = getConnection()) {
+            try (Connection conn = ConnectionFactory.getConnection()) {
                 List<Map<String, Object>> formularios = listarFormularios(conn);
                 request.setAttribute("formularios", formularios);
                 request.getRequestDispatcher("/views/relatorios/selecionar.jsp").forward(request, response);
@@ -58,25 +45,24 @@ public class RelatorioBasicoServlet extends HttpServlet {
             return;
         }
 
-        try (Connection conn = getConnection()) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
             int formularioId = Integer.parseInt(formularioIdStr);
             RelatorioDAO relatorioDAO = new RelatorioDAO(conn);
             
-           
+            //buscar
             Map<String, Object> formulario = relatorioDAO.buscarInfoFormulario(formularioId);
             
             int totalSubmissoes = relatorioDAO.contarSubmissoes(formularioId);
             
-           
+         
             List<Map<String, Object>> estatisticasMe = relatorioDAO.buscarEstatisticasMultiplaEscolha(formularioId);
-            
             
             List<Map<String, Object>> respostasAbertas = relatorioDAO.buscarRespostasAbertas(formularioId);
             
-           
+            
             double scoreMedio = relatorioDAO.calcularScoreMedio(formularioId);
             
-            
+           
             Map<Integer, Map<String, Object>> questoesOrganizadas = organizarEstatisticas(estatisticasMe);
             
             request.setAttribute("formulario", formulario);
@@ -161,7 +147,7 @@ public class RelatorioBasicoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-    
+        // Exportar dados 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuarioId") == null) {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -182,27 +168,27 @@ public class RelatorioBasicoServlet extends HttpServlet {
             return;
         }
 
-        try (Connection conn = getConnection()) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
             int formularioId = Integer.parseInt(formularioIdStr);
             boolean incluirIdentificacao = "true".equals(incluirIdStr);
             
             RelatorioDAO relatorioDAO = new RelatorioDAO(conn);
             List<Map<String, Object>> dadosBrutos = relatorioDAO.exportarDadosBrutos(formularioId, incluirIdentificacao);
             
-          
+            // Configurar resposta como CSV
             response.setContentType("text/csv; charset=UTF-8");
             response.setHeader("Content-Disposition", "attachment; filename=dados_brutos_" + formularioId + ".csv");
             
             StringBuilder csv = new StringBuilder();
             
-        
+            // Cabeçalho
             csv.append("Avaliacao ID,");
             if (incluirIdentificacao) {
                 csv.append("Aluno Nome,Matricula,");
             }
             csv.append("Data Submissao,Questao ID,Enunciado,Tipo,Texto Resposta,Alternativas Selecionadas\n");
             
-       
+            // Dados
             for (Map<String, Object> linha : dadosBrutos) {
                 csv.append(linha.get("avaliacao_id")).append(",");
                 if (incluirIdentificacao) {

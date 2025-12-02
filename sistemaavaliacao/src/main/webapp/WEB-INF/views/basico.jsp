@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.text.DecimalFormatSymbols" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -201,14 +202,15 @@
             List<Map<String, Object>> respostasAbertas = (List<Map<String, Object>>) request.getAttribute("respostasAbertas");
             Double scoreMedio = (Double) request.getAttribute("scoreMedio");
             String perfil = (String) request.getAttribute("perfil");
-            DecimalFormat df = new DecimalFormat("#.##");
+            DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(Locale.US);
+            DecimalFormat df = new DecimalFormat("#.##", symbols);
             
             if (formulario == null) {
         %>
             <div class="alert alert-error">
-                ⚠ Relatório não encontrado.
+                Relatório não encontrado.
             </div>
-            <a href="${pageContext.request.contextPath}/relatorio/basico" class="btn btn-secondary">← Voltar</a>
+            <a href="${pageContext.request.contextPath}/relatorio/basico" class="btn btn-secondary">Voltar</a>
         <%
                 return;
             }
@@ -216,18 +218,18 @@
 
         <div class="header">
             <div class="header-info">
-                <h1>📊 <%= formulario.get("titulo") %></h1>
+                <h1>Relatório: <%= formulario.get("titulo") %></h1>
                 <div class="subtitle">
                     <strong>Processo:</strong> <%= formulario.get("processo_nome") %> | 
                     <strong>Período:</strong> <%= formulario.get("data_inicio") %> a <%= formulario.get("data_fim") %>
                 </div>
             </div>
-            <a href="${pageContext.request.contextPath}/relatorio/basico" class="btn btn-secondary">← Voltar</a>
+            <a href="${pageContext.request.contextPath}/relatorio/basico" class="btn btn-secondary">Voltar</a>
         </div>
 
         <% if (request.getAttribute("erro") != null) { %>
             <div class="alert alert-error">
-                ⚠ <%= request.getAttribute("erro") %>
+                <%= request.getAttribute("erro") %>
             </div>
         <% } %>
 
@@ -243,7 +245,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value">
-                    <%= (Boolean) formulario.get("is_anonimo") ? "🔒 Sim" : "👤 Não" %>
+                    <%= (Boolean) formulario.get("is_anonimo") ? "Sim" : "Não" %>
                 </div>
                 <div class="stat-label">Avaliação Anônima</div>
             </div>
@@ -252,7 +254,7 @@
         <!-- Questões de Múltipla Escolha -->
         <% if (questoesOrganizadas != null && !questoesOrganizadas.isEmpty()) { %>
             <div class="section">
-                <h2 class="section-title">📈 Questões de Múltipla Escolha</h2>
+                <h2 class="section-title">Questões de Múltipla Escolha</h2>
                 
                 <%
                     for (Map.Entry<Integer, Map<String, Object>> entry : questoesOrganizadas.entrySet()) {
@@ -268,6 +270,7 @@
                                 double percentual = (Double) alt.get("percentual");
                                 int peso = (Integer) alt.get("peso");
                                 double safePercentual = (Double.isNaN(percentual) || Double.isInfinite(percentual)) ? 0.0 : percentual;
+                                String widthPercentual = String.valueOf(safePercentual) + "%";
                         %>
                             <div class="alternativa-resultado">
                                 <div class="alternativa-texto">
@@ -278,7 +281,7 @@
                                     </div>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: <%= String.format(java.util.Locale.US, "%.2f%%", safePercentual) %>;">
+                                    <div class="progress-fill" style="width: <%= widthPercentual %>;">
                                         <%= df.format(safePercentual) %>%
                                     </div>
                                 </div>
@@ -296,7 +299,7 @@
         <!-- Respostas Abertas -->
         <% if (respostasAbertas != null && !respostasAbertas.isEmpty()) { %>
             <div class="section">
-                <h2 class="section-title">💬 Respostas Abertas</h2>
+                <h2 class="section-title">Respostas Abertas</h2>
                 
                 <% 
                     // Agrupar por questão
@@ -345,7 +348,7 @@
         <!-- Exportar Dados (apenas para administradores) -->
         <% if ("administrador".equals(perfil)) { %>
             <div class="section">
-                <h2 class="section-title">📥 Exportar Dados</h2>
+                <h2 class="section-title">Exportar Dados</h2>
                 <p style="color: #666; margin-bottom: 15px;">
                     Baixe os dados brutos em formato CSV para análise externa.
                 </p>
@@ -353,14 +356,14 @@
                 <form method="post" action="${pageContext.request.contextPath}/relatorio/basico" style="display: inline-block; margin-right: 15px;">
                     <input type="hidden" name="formularioId" value="<%= formulario.get("id") %>">
                     <input type="hidden" name="incluirIdentificacao" value="false">
-                    <button type="submit" class="btn btn-primary">📄 Exportar (Anônimo)</button>
+                    <button type="submit" class="btn btn-primary">Exportar (Anônimo)</button>
                 </form>
                 
                 <% if (!(Boolean) formulario.get("is_anonimo")) { %>
                     <form method="post" action="${pageContext.request.contextPath}/relatorio/basico" style="display: inline-block;">
                         <input type="hidden" name="formularioId" value="<%= formulario.get("id") %>">
                         <input type="hidden" name="incluirIdentificacao" value="true">
-                        <button type="submit" class="btn btn-secondary">👤 Exportar (com Identificação)</button>
+                        <button type="submit" class="btn btn-secondary">Exportar (com Identificação)</button>
                     </form>
                 <% } %>
             </div>

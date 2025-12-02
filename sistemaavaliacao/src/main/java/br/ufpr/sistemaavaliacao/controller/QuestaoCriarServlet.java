@@ -5,7 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufpr.sistemaavaliacao.model.Questao;
+import br.ufpr.sistemaavaliacao.model.QuestaoAberta;
 import br.ufpr.sistemaavaliacao.dao.QuestaoAbDAO;
 
 import java.io.IOException;
@@ -22,11 +22,10 @@ public class QuestaoCriarServlet extends HttpServlet {
         String descricao = req.getParameter("descricao");
         int idFormulario = Integer.parseInt(req.getParameter("idFormulario"));
 
-        Questao q = new Questao();
-        q.setDescricao(descricao);
-        q.setIdFormulario(idFormulario);
+        // Questão aberta conforme o novo modelo: enunciado + obrigatoriedade (padrão: não obrigatória)
+        QuestaoAberta q = new QuestaoAberta(descricao, false);
 
-        new QuestaoAbDAO().inserirQuestaoAberta(q);
+        new QuestaoAbDAO().inserirQuestaoAberta(q, idFormulario);
 
         resp.sendRedirect("../formularios/visualizar?id=" + idFormulario);
     }
