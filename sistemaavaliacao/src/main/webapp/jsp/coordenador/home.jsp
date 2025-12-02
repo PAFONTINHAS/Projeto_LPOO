@@ -33,7 +33,7 @@
         </div>
 
         <div class="header-direito">
-            <button>Sair</button>
+            <button><a href="${pageContext.request.contextPath}/LogoutServlet">Sair</a></button>
             <button>Perfil</button>
         </div>
     </header>
@@ -47,7 +47,8 @@
 
         <div class="cards">
             <div class="card">
-                <a href="cursos_curriculos.jsp">Gerenciar Cursos e Currículos</a>
+                <!-- ATUALIZADO: Aponta para o servlet de curso para iniciar a navegação -->
+                <a href="${pageContext.request.contextPath}/coordenador/curso?acao=listar">Gerenciar Cursos e Currículos</a>
             </div>
 
             <div class="card">
@@ -57,7 +58,7 @@
                 <a href="criar-formulario.jsp">Gerenciar Formulários</a>
             </div>
             <div class="card">
-                <a href="">Relatórios e Dados</a>
+                <a href="${pageContext.request.contextPath}/relatorio/basico">Relatórios e Dados</a>
             </div>
         </div>
 

@@ -3,6 +3,8 @@ package br.ufpr.sistemaavaliacao.dao;
 import br.ufpr.sistemaavaliacao.config.ConnectionFactory;
 import br.ufpr.sistemaavaliacao.model.*; 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO {
     
@@ -13,7 +15,7 @@ public class UsuarioDAO {
      * @return O objeto Usuario se a autenticação for bem-sucedida, null caso contrário.
      */
     public Usuario buscarPorLoginESenha(String login, String senha) {
-        // ... (Implementação mantida do passo anterior)
+        // ... (Implementação mantida)
         String sql = "SELECT id, nome, email, login, senha, perfil FROM usuarios WHERE login = ? AND senha = ?";
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -42,6 +44,52 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(conn);
             // Fechar stmt e rs...
         }
+    }
+    
+    /**
+     * Busca um usuário por ID. (NOVO MÉTODO)
+     */
+    public Usuario buscarPorId(int id) {
+        String sql = "SELECT id, nome, email, login, senha, perfil FROM usuarios WHERE id = ?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setLogin(rs.getString("login"));
+                    usuario.setPerfil(rs.getString("perfil"));
+                    return usuario;
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar usuário por ID.", e);
+        }
+    }
+    
+    /**
+     * Lista usuários com perfil de Coordenador ou Professor (Para seleção em CRUD de Cursos). (NOVO MÉTODO)
+     */
+    public List<Usuario> listarCoordenadoresEProfessores() throws SQLException {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT id, nome, perfil FROM usuarios WHERE perfil = 'coordenador' OR perfil = 'professor' ORDER BY nome";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setPerfil(rs.getString("perfil"));
+                lista.add(usuario);
+            }
+        }
+        return lista;
     }
 
 

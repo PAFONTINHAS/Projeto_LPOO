@@ -132,3 +132,38 @@ CREATE TABLE turmas_alunos (
     FOREIGN KEY (turma_id) REFERENCES turmas(id),
     FOREIGN KEY (aluno_usuario_id) REFERENCES alunos(usuario_id)
 );
+
+CREATE TABLE cursos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    coordenador_usuario_id INT, -- Referencia o ID do usuário (professor/coordenador)
+    is_ativo TINYINT(1) DEFAULT 1,
+    campus VARCHAR(100),
+    modalidade VARCHAR(100),
+    turno VARCHAR(100),
+    setor VARCHAR(100),
+    FOREIGN KEY (coordenador_usuario_id) REFERENCES usuarios(id)
+);
+
+-- Tabela para armazenar informações do Currículo (RF04)
+-- Um curso pode ter vários currículos (versões)
+CREATE TABLE curriculos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    curso_id INT NOT NULL,
+    versao VARCHAR(50) NOT NULL,
+    ano_implantacao INT,
+    portaria_aprovacao VARCHAR(255),
+    ch_obrigatoria INT,
+    ch_optativa INT,
+    ch_atividades_formativas INT,
+    ch_extensao INT,
+    tcc_obrigatorio TINYINT(1) DEFAULT 1,
+    observacoes TEXT,
+    FOREIGN KEY (curso_id) REFERENCES cursos(id),
+    UNIQUE (curso_id, versao)
+);
+
+ALTER TABLE turmas ADD COLUMN curso_id INT;
+ALTER TABLE turmas ADD CONSTRAINT fk_turma_curso FOREIGN KEY (curso_id) REFERENCES cursos(id);
+

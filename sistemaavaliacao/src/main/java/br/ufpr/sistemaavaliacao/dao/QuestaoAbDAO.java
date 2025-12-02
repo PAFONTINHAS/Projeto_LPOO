@@ -1,4 +1,4 @@
-package br.ufpr.sistemaavaliacao.dao;
+/*package br.ufpr.sistemaavaliacao.dao;
 
 import br.ufpr.sistemaavaliacao.model.Questao;
 import br.ufpr.sistemaavaliacao.config.ConnectionFactory;
@@ -52,3 +52,4 @@ public class QuestaoAbDAO {
         return lista;
     }
 }
+*/
