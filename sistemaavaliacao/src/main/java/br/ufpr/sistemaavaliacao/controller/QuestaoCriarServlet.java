@@ -1,4 +1,4 @@
-package br.ufpr.sistemaavaliacao.controller;
+/*package br.ufpr.sistemaavaliacao.controller;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
@@ -31,3 +31,4 @@ public class QuestaoCriarServlet extends HttpServlet {
         resp.sendRedirect("../formularios/visualizar?id=" + idFormulario);
     }
 }
+*/

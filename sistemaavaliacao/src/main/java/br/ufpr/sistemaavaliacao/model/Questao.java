@@ -1,28 +1,43 @@
 package br.ufpr.sistemaavaliacao.model;
 
 import java.util.List;
-import br.ufpr.sistemaavaliacao.model.Alternativa; // Necessário
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class Questao {
-    protected String enunciado;
-    protected boolean isObrigatoria;
+public class Questao {
 
-    protected Questao(String enunciado, boolean isObrigatoria){
+    // 🔹 Campos antigos que o DAO/Servlet esperam
+    private int id;
+    private int idFormulario;     // corresponde ao id_formulario no banco
+    private String tipo;          // "aberta", "multipla", etc.
+
+    // 🔹 Campos novos da model refatorada
+    private String enunciado;
+    private boolean isObrigatoria;
+
+    // 🔹 Construtor vazio (necessário para JDBC / frameworks)
+    public Questao() {
+    }
+
+    // 🔹 Construtor usado no novo modelo (se alguém já estiver usando)
+    public Questao(String enunciado, boolean isObrigatoria) {
         this.enunciado = enunciado;
         this.isObrigatoria = isObrigatoria;
     }
 
-    public boolean getIsObrigatoria(){
+    // 🔹 Compatibilidade com o código antigo que usa "descricao"
+    public String getDescricao() {
+        return this.enunciado;
+    }
+
+    public void setDescricao(String descricao) {
+        this.enunciado = descricao;
+    }
+
+    // 🔹 Se quiser manter esse nome específico também
+    public boolean getIsObrigatoria() {
         return this.isObrigatoria;
     }
-    // private int id; 
-    // private int formularioId; 
-    // private String enunciado; 
-    // private boolean isObrigatoria; // RF10
-    // private String tipo; // "Aberta", "MultiplaEscolha"
-    // private boolean permiteMultiplaSelecao; // RF08: Apenas para Multipla Escolha
-    // private List<Alternativa> alternativas; // Apenas para Multipla Escolha
 }
