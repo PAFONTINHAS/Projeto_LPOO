@@ -224,3 +224,35 @@ align-items: center;
     display: flex;
     flex-direction: column;
 }
+
+
+#lista-questoes-adicionadas {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px dashed #ccc;
+}
+
+.questao-item {
+    background: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.badge {
+    background: #007bff;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.area-alternativas {
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+}
+
+.hidden {
+    display: none;
+}

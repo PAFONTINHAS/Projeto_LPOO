@@ -1,52 +1,75 @@
 package br.ufpr.sistemaavaliacao.controller;
 
+import br.ufpr.sistemaavaliacao.builder.QuestaoBuilder;
+import br.ufpr.sistemaavaliacao.config.ConnectionFactory;
 import br.ufpr.sistemaavaliacao.dao.FormularioDAO;
 import br.ufpr.sistemaavaliacao.model.Formulario;
+import br.ufpr.sistemaavaliacao.model.Questao;
+
 import java.io.IOException; // Necessário para throws IOException
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException; // Necessário para throws ServletException
-//import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-//@WebServlet("/FormularioCriarServlet")
+@WebServlet("/FormularioCriarServlet")
 public class FormularioCriarServlet extends HttpServlet {
+
+
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String titulo = request.getParameter("titulo");
-        String processoIdStr = request.getParameter("processoAvaliativoId"); 
-        String instrucoes = request.getParameter("instrucoes");
-        boolean isAnonimo = "on".equals(request.getParameter("anonimo")); 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        Formulario formulario = new Formulario();
-        formulario.setTitulo(titulo);
-        formulario.setInstrucoes(instrucoes);
-        formulario.setAnonimo(isAnonimo);
-        
-        try {
-            if (processoIdStr != null && !processoIdStr.isEmpty()) {
-                formulario.setProcessoAvaliativoId(Integer.parseInt(processoIdStr));
-            } else {
-                 throw new IllegalArgumentException("ID do Processo Avaliativo não pode ser nulo.");
+                
+                String titulo = request.getParameter("titulo");
+                Formulario formulario = new Formulario(titulo, false);
+                
+                int totalQuestoes = Integer.parseInt(request.getParameter("totalQuestoes"));
+                
+            for (int i = 1; i <= totalQuestoes; i++) {
+                String tipo = request.getParameter("tipo_q" + i);
+                String enunciado = request.getParameter("enunciado_q" + i);
+                boolean obrigatoria = request.getParameter("obrigatoria_q" + i) != null;
+
+                QuestaoBuilder builder = new QuestaoBuilder()
+                        .doTipo(tipo)
+                        .comEnunciado(enunciado)
+                        .isObrigatoria(obrigatoria);
+                        
+                        if ("FECHADA".equals(tipo)) {
+                    boolean multiSelecao = request.getParameter("multi_q" + i) != null;
+                    builder.permiteMultiplaSelecao(multiSelecao);
+                    
+                    String[] textosAlt = request.getParameterValues("texto_alt_q" + i);
+                    String[] pesosAlt = request.getParameterValues("peso_alt_q" + i);
+                    
+                    if (textosAlt != null) {
+                        for (int j = 0; j < textosAlt.length; j++) {
+                            int peso = Integer.parseInt(pesosAlt[j]);
+                            builder.comAlternativa(textosAlt[j], peso);
+                        }
+                    }
+                }
+                
+                Questao novQuestao = builder.build();
+                
+                formulario.adicionarQuestao(novQuestao);
+                
             }
-        } catch (NumberFormatException e) {
-            request.setAttribute("mensagemErro", "ID do Processo Avaliativo inválido.");
-            request.getRequestDispatcher("/jsp/coordenador/criar-formulario.jsp").forward(request, response);
-            return;
-        } catch (IllegalArgumentException e) {
-            request.setAttribute("mensagemErro", e.getMessage());
-            request.getRequestDispatcher("/jsp/coordenador/criar-formulario.jsp").forward(request, response);
-            return;
+            
+        try (Connection conexao = ConnectionFactory.getConnection()) {
+            FormularioDAO dao = new FormularioDAO(conexao);
+            dao.salvar(formulario);
+
+            response.sendRedirect("jsp/aluno/home.jsp");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendRedirect("erro.jsp?msg=" + e.getMessage());
         }
 
-        // Lógica de parsing das questões virá em um passo futuro.
-        
-        try {
-            new FormularioDAO().salvar(formulario); 
-            response.sendRedirect(request.getContextPath() + "/jsp/coordenador/processos-avaliativos.jsp");
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            request.setAttribute("mensagemErro", "Erro ao salvar formulário: " + e.getMessage());
-            request.getRequestDispatcher("/jsp/coordenador/criar-formulario.jsp").forward(request, response);
-        }
     }
 }

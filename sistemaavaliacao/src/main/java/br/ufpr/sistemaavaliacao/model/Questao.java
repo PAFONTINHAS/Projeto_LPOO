@@ -1,50 +1,28 @@
 package br.ufpr.sistemaavaliacao.model;
 
-public class Questao {
+import java.util.List;
+import br.ufpr.sistemaavaliacao.model.Alternativa; // Necessário
+import lombok.*;
 
-    private int id;
-    private String descricao;
-    private String tipo; // aberta ou fechada
-    private int idFormulario;
+@Getter
+@Setter
+public abstract class Questao {
+    protected String enunciado;
+    protected boolean isObrigatoria;
 
-    public Questao() {}
-
-    public Questao(int id, String descricao, String tipo, int idFormulario) {
-        this.id = id;
-        this.descricao = descricao;
-        this.tipo = tipo;
-        this.idFormulario = idFormulario;
+    protected Questao(String enunciado, boolean isObrigatoria){
+        this.enunciado = enunciado;
+        this.isObrigatoria = isObrigatoria;
     }
 
-    public int getId() {
-        return id;
+    public boolean getIsObrigatoria(){
+        return this.isObrigatoria;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getIdFormulario() {
-        return idFormulario;
-    }
-
-    public void setIdFormulario(int idFormulario) {
-        this.idFormulario = idFormulario;
-    }
+    // private int id; 
+    // private int formularioId; 
+    // private String enunciado; 
+    // private boolean isObrigatoria; // RF10
+    // private String tipo; // "Aberta", "MultiplaEscolha"
+    // private boolean permiteMultiplaSelecao; // RF08: Apenas para Multipla Escolha
+    // private List<Alternativa> alternativas; // Apenas para Multipla Escolha
 }
