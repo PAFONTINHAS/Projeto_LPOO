@@ -22,6 +22,52 @@ public class FormularioDAO {
         this.conn = conn;
     }
 
+    public List<Formulario> listarTodos() throws SQLException {
+
+        List<Formulario> formularios = new ArrayList<>();
+
+        String sql = "SELECT * FROM formularios WHERE processo_avaliativo_id IS NOT NULL";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql); ResultSet result = statement.executeQuery()) {
+
+            while (result.next()) {
+
+                Formulario form = new Formulario(
+                    result.getString("titulo"),
+                    result.getBoolean("is_anonimo")
+                );
+
+                form.setId(result.getInt("id"));
+                form.setInstrucoes(result.getString("instrucoes"));
+            
+
+                formularios.add(form);
+            }
+        }
+
+        return formularios;
+    }
+
+        // No FormularioDAO.java
+    public Formulario buscarPorIdCompleto(int id) throws SQLException {
+        String sql = "SELECT * FROM formularios WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Formulario f = new Formulario(rs.getString("titulo"), rs.getBoolean("is_anonimo"));
+                    f.setId(rs.getInt("id"));
+                    f.setInstrucoes(rs.getString("instrucoes"));
+                    // Reusa seu método existente que já busca questões e alternativas
+                    f.setQuestoes(listarQuestoesPorFormulario(f.getId())); 
+                    return f;
+                }
+            }
+        }
+        return null;
+    }
+
+
     public List<Formulario> listarTodosSemProcesso() throws SQLException {
 
         List<Formulario> formularios = new ArrayList<>();
@@ -220,7 +266,7 @@ public class FormularioDAO {
                         qme.setAlternativas(listarAlternativas(questaoId));
                         q = qme;
                     }
-                    // q.setId(questaoId); // Se sua classe Questao tiver ID, setar aqui
+                    q.setId(questaoId); // Se sua classe Questao tiver ID, setar aqui
                     questoes.add(q);
                 }
             }
@@ -260,7 +306,14 @@ public class FormularioDAO {
             stmt.setInt(1, questaoId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    alts.add(new Alternativa(rs.getString("texto"), rs.getInt("peso")));
+                    // 1. Cria o objeto com texto e peso
+                    Alternativa alt = new Alternativa(rs.getString("texto"), rs.getInt("peso"));
+                    
+                    // 2. IMPORTANTE: Recupera e Seta o ID que vem do banco!
+                    alt.setId(rs.getInt("id")); 
+                    
+                    // 3. Adiciona na lista
+                    alts.add(alt);
                 }
             }
         }

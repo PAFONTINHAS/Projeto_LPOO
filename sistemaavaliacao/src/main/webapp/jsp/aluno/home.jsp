@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="br.ufpr.sistemaavaliacao.model.Usuario" %>
+<%@ page import="br.ufpr.sistemaavaliacao.dao.AvaliacaoDAO" %>
+<%@ page import="br.ufpr.sistemaavaliacao.config.ConnectionFactory" %>
+<%@ page import="br.ufpr.sistemaavaliacao.dto.AvaliacaoPendenteDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.Connection" %>
 
 <% 
     Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -9,6 +14,18 @@
         response.sendRedirect(request.getContextPath() + "/login.jsp?msg=Acesso negado.");
         return;
     }
+
+    // --- CÓDIGO NOVO: BUSCAR PENDÊNCIAS ---
+    List<AvaliacaoPendenteDTO> pendencias = null;
+    try (Connection conn = ConnectionFactory.getConnection()) {
+        AvaliacaoDAO dao = new AvaliacaoDAO(conn);
+        // O ID do usuário logado vem de usuario.getId() (confirme se o método é getId ou getUsuarioId na sua classe Usuario)
+        pendencias = dao.buscarPendentes(usuario.getId());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    // Coloca na requisição para o JSTL usar
+    request.setAttribute("pendencias", pendencias);
 %>
 
 <!DOCTYPE html>
@@ -38,22 +55,31 @@
     </header>
 
     <div class="container">
-
         <div class="card">
-
             <div class="titulo-card">
                 <h1>Pesquisas Disponíveis <i class="fa-solid fa-user"></i></h1>
             </div>
 
-
             <div class="pesquisas">
-
                 <ul>
-                    <li>
+                    <c:if test="${empty pendencias}">
+                        <li style="list-style: none; text-align: center; color: #666;">
+                            Nenhuma avaliação pendente no momento.
+                        </li>
+                    </c:if>
 
-                        <a href="pesquisa.jsp">Avaliação de Ferramentas de IA com Professor X <span class="material-symbols-outlined redirect">edit_square</span></a>
-                    </li>
-
+                    <c:forEach var="p" items="${pendencias}">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/CarregarFormularioServlet?idForm=${p.idFormulario}&idTurma=0">
+                                
+                                <strong>${p.tituloFormulario}</strong> <br>
+                                
+                                <span style="font-size: 0.9em; color: #555;">${p.nomeProcesso}</span>
+                                
+                                <span class="material-symbols-outlined redirect">edit_square</span>
+                            </a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             

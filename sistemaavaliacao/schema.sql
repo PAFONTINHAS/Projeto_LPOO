@@ -80,7 +80,7 @@ CREATE TABLE avaliacoes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     aluno_usuario_id INT,
     formulario_id INT,
-    data_submissao DATETIME,
+    data_submissao DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (aluno_usuario_id) REFERENCES alunos(usuario_id),
     FOREIGN KEY (formulario_id) REFERENCES formularios(id)
 );
@@ -91,6 +91,12 @@ CREATE TABLE respostas (
     questao_id INT,
     FOREIGN KEY (avaliacao_id) REFERENCES avaliacoes(id),
     FOREIGN KEY (questao_id) REFERENCES questoes(id)
+);
+
+CREATE TABLE turmas_alunos (
+    turma_id INT,
+    aluno_id INT,
+    PRIMARY KEY (turma_id, aluno_id)
 );
 
 CREATE TABLE respostas_abertas (
@@ -120,13 +126,13 @@ CREATE TABLE unidades_curriculares (
     FOREIGN KEY (curso_id) REFERENCES cursos(id)
 );
 
-CREATE TABLE processos_turmas{
+CREATE TABLE processos_turmas(
     processo_id INT,
     turma_id INT,
     PRIMARY KEY (processo_id, turma_id),
     FOREIGN KEY (processo_id) REFERENCES processos_avaliativos(id),
     FOREIGN KEY (turma_id) REFERENCES turmas(id)
-}
+)
 
 
 CREATE TABLE turmas (

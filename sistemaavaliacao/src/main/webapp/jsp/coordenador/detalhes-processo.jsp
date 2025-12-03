@@ -92,7 +92,7 @@
                                 </c:if>
                             </div>
 
-                            <%-- <div class="area-resposta">
+                            <div class="area-resposta">
                                 <c:if test="${q.class.simpleName == 'QuestaoAberta'}">
                                     <textarea disabled class="input-preview">Espaço para resposta dissertativa do aluno...</textarea>
                                 </c:if>
@@ -107,7 +107,7 @@
                                         </c:forEach>
                                     </ul>
                                 </c:if>
-                            </div> --%>
+                            </div>
                         </div>
                     </c:forEach>
                     

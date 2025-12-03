@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 public abstract class Questao {
+    protected int id;
     protected String enunciado;
     protected boolean isObrigatoria;
 
@@ -18,6 +19,11 @@ public abstract class Questao {
     public boolean getIsObrigatoria(){
         return this.isObrigatoria;
     }
+
+    public boolean isMultiplaEscolha(){
+        return this instanceof QuestaoMultiplaEscolha;
+    }
+
     // private int id; 
     // private int formularioId; 
     // private String enunciado; 
