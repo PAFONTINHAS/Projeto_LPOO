@@ -62,7 +62,7 @@
 
         <p class="titulo-card">Novo Processo Avaliativo</p>
 
-        <form action="SalvarProcessoInicial" method="post">
+        <form action="${pageContext.request.contextPath}/SalvarProcessoInicial" method="post">
 
             <div class="campo">
                 <label for="titulo">Título</label>

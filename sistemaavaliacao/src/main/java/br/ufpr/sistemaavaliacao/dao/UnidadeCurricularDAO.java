@@ -8,13 +8,13 @@ import java.util.*;
 public class UnidadeCurricularDAO {
 
     public void inserir(UnidadeCurricular uc) throws Exception {
-        String sql = "INSERT INTO unidade_curricular (nome, descricao) VALUES (?, ?)";
+        String sql = "INSERT INTO unidade_curricular (nome, tipo) VALUES (?, ?)";
 
         try (Connection con = ConnectionFactory.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, uc.getNome());
-            ps.setString(2, uc.getDescricao());
+            ps.setString(2, uc.getTipo());
             ps.executeUpdate();
         }
     }
@@ -28,11 +28,12 @@ public class UnidadeCurricularDAO {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                UnidadeCurricular uc = new UnidadeCurricular(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("descricao")
-                );
+                UnidadeCurricular uc = new UnidadeCurricular();
+
+                uc.setId(rs.getInt("id"));
+                uc.setNome(rs.getString("nome"));
+                uc.setTipo(rs.getString("tipo"));
+            
                 lista.add(uc);
             }
         }
@@ -49,24 +50,26 @@ public class UnidadeCurricularDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new UnidadeCurricular(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("descricao")
-                );
+
+                UnidadeCurricular uc = new UnidadeCurricular();
+
+                uc.setId(rs.getInt("id"));
+                uc.setNome(rs.getString("nome"));
+                uc.setTipo(rs.getString("tipo"));
+            
             }
         }
         return null;
     }
 
     public void atualizar(UnidadeCurricular uc) throws Exception {
-        String sql = "UPDATE unidade_curricular SET nome=?, descricao=? WHERE id=?";
+        String sql = "UPDATE unidade_curricular SET nome=?, tipo=? WHERE id=?";
 
         try (Connection con = ConnectionFactory.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, uc.getNome());
-            ps.setString(2, uc.getDescricao());
+            ps.setString(2, uc.getTipo());
             ps.setInt(3, uc.getId());
             ps.executeUpdate();
         }

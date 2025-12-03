@@ -46,25 +46,25 @@ public class TurmaServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    // @Override
+    // protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    //         throws ServletException, IOException {
 
-        Turma turma = new Turma();
-        turma.setNome(req.getParameter("nome"));
-        turma.setAno(Integer.parseInt(req.getParameter("ano")));
-        turma.setSemestre(Integer.parseInt(req.getParameter("semestre")));
+    //     Turma turma = new Turma();
+    //     turma.setNome(req.getParameter("nome"));
+    //     turma.setAno(Integer.parseInt(req.getParameter("ano")));
+    //     turma.setSemestre(Integer.parseInt(req.getParameter("semestre")));
 
-        UnidadeCurricular uc = new UnidadeCurricular();
-        uc.setId(Integer.parseInt(req.getParameter("id_uc")));
-        turma.setUnidadeCurricular(uc);
+    //     UnidadeCurricular uc = new UnidadeCurricular();
+    //     uc.setId(Integer.parseInt(req.getParameter("id_uc")));
+    //     turma.setUnidadeCurricular(uc);
 
-        try {
-            turmaDAO.inserir(turma);
-            resp.sendRedirect("turma?acao=listar");
+    //     try {
+    //         turmaDAO.inserir(turma);
+    //         resp.sendRedirect("turma?acao=listar");
 
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-    }
+    //     } catch (Exception e) {
+    //         throw new ServletException(e);
+    //     }
+    // }
 }

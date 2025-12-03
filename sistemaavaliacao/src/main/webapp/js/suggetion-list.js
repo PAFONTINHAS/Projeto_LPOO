@@ -8,10 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const suggestionsList = document.getElementById('suggestions-list');
 
-    const availableSuggestions = [
-        'Administração', 'Análise e Desenvolvimento de Sistemas', 'Agronomia', 'Direito', 'Secretariado',
-    ];
-
+    const availableSuggestions = suggestions;
 
     function createTag(label) {
         const li = document.createElement('li');
@@ -125,6 +122,5 @@ document.addEventListener('DOMContentLoaded', function () {
     tagInput.addEventListener('focus', () => {
         showSuggestions();
     });
-
 });
 

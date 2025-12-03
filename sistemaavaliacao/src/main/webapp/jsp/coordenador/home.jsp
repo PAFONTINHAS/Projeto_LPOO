@@ -51,7 +51,7 @@
             </div>
 
             <div class="card">
-                <a href="processos-avaliativos.jsp">Gerenciar Processos Avaliativos</a>
+                <a href="${pageContext.request.contextPath}/ListarProcessosServlet">Gerenciar Processos Avaliativos</a>
             </div>
             <div class="card">
                 <a href="criar-formulario.jsp">Gerenciar Formulários</a>

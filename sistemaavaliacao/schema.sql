@@ -27,6 +27,7 @@ CREATE TABLE alunos (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+
 CREATE TABLE professores (
     usuario_id INT PRIMARY KEY,
     registro VARCHAR(255),
@@ -38,7 +39,8 @@ CREATE TABLE processos_avaliativos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255),
     data_inicio DATE,
-    data_fim DATE
+    data_fim DATE,
+    observacoes TEXT
 );
 
 
@@ -104,11 +106,28 @@ CREATE TABLE respostas_multipla_escolha_alternativas (
     FOREIGN KEY (alternativa_id) REFERENCES alternativas(id)
 );
 
+CREATE TABLE cursos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200) NOT NULL
+);
+
+
 CREATE TABLE unidades_curriculares (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    curso_id INT,
     nome VARCHAR(255),
-    tipo VARCHAR(255)  -- extensão, disciplina, formativa
+    tipo VARCHAR(255),  -- extensão, disciplina, formativa
+    FOREIGN KEY (curso_id) REFERENCES cursos(id)
 );
+
+CREATE TABLE processos_turmas{
+    processo_id INT,
+    turma_id INT,
+    PRIMARY KEY (processo_id, turma_id),
+    FOREIGN KEY (processo_id) REFERENCES processos_avaliativos(id),
+    FOREIGN KEY (turma_id) REFERENCES turmas(id)
+}
+
 
 CREATE TABLE turmas (
     id INT AUTO_INCREMENT PRIMARY KEY,

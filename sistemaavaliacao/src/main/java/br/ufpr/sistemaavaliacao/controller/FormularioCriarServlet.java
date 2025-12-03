@@ -23,6 +23,7 @@ public class FormularioCriarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+                request.setCharacterEncoding("UTF-8");
                 
                 String titulo = request.getParameter("titulo");
                 Formulario formulario = new Formulario(titulo, false);

@@ -48,16 +48,17 @@ public class UnidadeCurricularServlet extends HttpServlet {
         }
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UnidadeCurricular uc = new UnidadeCurricular(
-            req.getParameter("id") != null && !req.getParameter("id").isEmpty()
-                ? Integer.parseInt(req.getParameter("id"))
-                : 0,
-            req.getParameter("nome"),
-            req.getParameter("descricao")
+        UnidadeCurricular uc = new UnidadeCurricular();
+
+        uc.setId(req.getParameter("id") != null && !req.getParameter("id").isEmpty()
+            ? Integer.parseInt(req.getParameter("id"))
+            : 0
         );
+
+        uc.setNome(req.getParameter("nome"));
+        uc.setTipo(req.getParameter("tipo"));
 
         try {
             if (uc.getId() == 0)

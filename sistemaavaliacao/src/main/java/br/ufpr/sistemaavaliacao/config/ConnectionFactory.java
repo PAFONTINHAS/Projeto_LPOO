@@ -8,7 +8,7 @@ public class ConnectionFactory {
     // Configurações do Banco de Dados
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     // Mantenha o nome do DB como avaliaufpr, conforme seu schema.sql
-    private static final String URL = "jdbc:mysql://localhost:3306/avaliaufpr?useTimezone=true&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/avaliaufpr?useTimezone=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
     private static final String USER = "root"; // <== ATENÇÃO: Altere conforme sua configuração local
     private static final String PASS = "admin"; // <== ATENÇÃO: Altere conforme sua configuração local
 
