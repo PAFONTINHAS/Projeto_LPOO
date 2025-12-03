@@ -65,7 +65,7 @@
 
     <div class="secao2">
         <p class="subtitulo">Processos existentes:</p>
-        <button> <a href="novo-processo1.jsp">+ Criar novo processo</a>  </button>
+        <button> <a href="${pageContext.request.contextPath}/jsp/coordenador/novo_processo1.jsp">+ Criar novo processo</a>  </button>
     </div>
 
     <div class="container">

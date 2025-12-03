@@ -44,14 +44,14 @@ public class NovoProcessoServlet extends HttpServlet{
                 HttpSession session = request.getSession();
                 session.setAttribute("processoEmAndamento", processo);
 
-                response.sendRedirect("jsp/coordenador/novo-processo2.jsp");
+                response.sendRedirect("jsp/coordenador/novo_processo2.jsp");
             } catch(SQLException e){
                 e.printStackTrace();
-                response.sendRedirect("jsp/coordenador/novo-processo1.jsp?erro=ErroBanco");
+                response.sendRedirect("jsp/coordenador/novo_processo1.jsp?erro=ErroBanco");
             }
         } catch(IllegalArgumentException e){
 
-            response.sendRedirect(("jsp/coordenador/novo-processo1.jsp?erro=DatasInvalidas"));
+            response.sendRedirect(("jsp/coordenador/novo_processo1.jsp?erro=DatasInvalidas"));
         }
     }
     

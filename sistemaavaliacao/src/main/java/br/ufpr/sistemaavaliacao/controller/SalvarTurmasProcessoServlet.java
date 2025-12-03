@@ -38,10 +38,10 @@ public class SalvarTurmasProcessoServlet extends HttpServlet{
                 
             } catch (SQLException e) {
                 e.printStackTrace();
-                response.sendRedirect("jsp/coordenador/novo-processo3.jsp?erro=ErroAoSalvarTurmas");
+                response.sendRedirect("jsp/coordenador/novo_processo3.jsp?erro=ErroAoSalvarTurmas");
             }
         } else {
-            response.sendRedirect("jsp/coordenador/novo-processo3.jsp?erro=NenhumaTurmaSelecionada");
+            response.sendRedirect("jsp/coordenador/novo_processo3.jsp?erro=NenhumaTurmaSelecionada");
         }
     }
     

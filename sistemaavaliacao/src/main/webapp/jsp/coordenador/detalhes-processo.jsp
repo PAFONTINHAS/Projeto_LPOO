@@ -72,14 +72,23 @@
         <c:forEach var="form" items="${formularios}">
             <div class="card-formulario">
                 
-                <div class="cabecalho-form">
-                    <h3>${form.titulo}</h3>
-                    <span class="badge-anonimo">
-                        ${form.isAnonimo ? 'Anônimo' : 'Identificado'}
-                    </span>
+                <div class="cabecalho-form" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3>${form.titulo}</h3>
+                        <p class="instrucoes"><em>"${form.instrucoes}"</em></p>
+                    </div>
+                    
+                    <div style="text-align: right;">
+                        <span class="badge-anonimo" style="display:block; margin-bottom: 5px; text-align: center;">
+                            ${form.isAnonimo ? 'Anônimo' : 'Identificado'}
+                        </span>
+                        
+                        <span style="background-color: #0351A6; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem;">
+                            <strong>${form.quantidadeRespostas}</strong> respostas
+                        </span>
+                    </div>
                 </div>
                 
-                <p class="instrucoes"><em>"${form.instrucoes}"</em></p>
                 <hr>
 
                 <div class="lista-questoes">
@@ -93,20 +102,29 @@
                             </div>
 
                             <div class="area-resposta">
-                                <c:if test="${q.class.simpleName == 'QuestaoAberta'}">
+                                
+                                <c:if test="${!q.multiplaEscolha}">
                                     <textarea disabled class="input-preview">Espaço para resposta dissertativa do aluno...</textarea>
                                 </c:if>
 
-                                <c:if test="${q.class.simpleName == 'QuestaoMultiplaEscolha'}">
+                                <c:if test="${q.multiplaEscolha}">
                                     <ul class="lista-alternativas">
                                         <c:forEach var="alt" items="${q.alternativas}">
                                             <li>
                                                 <input type="${q.permiteMultiplaSelecao ? 'checkbox' : 'radio'}" disabled>
-                                                <label>${alt.texto} <span class="peso-badge">(Peso: ${alt.peso})</span></label>
+                                                <label>
+                                                    ${alt.texto} 
+                                                    <span class="peso-badge">(Peso: ${alt.peso})</span>
+                                                </label>
                                             </li>
                                         </c:forEach>
                                     </ul>
+                                    
+                                    <c:if test="${empty q.alternativas}">
+                                        <p style="color: red; font-size: 0.8em;">(Erro: Nenhuma alternativa cadastrada para esta questão)</p>
+                                    </c:if>
                                 </c:if>
+
                             </div>
                         </div>
                     </c:forEach>

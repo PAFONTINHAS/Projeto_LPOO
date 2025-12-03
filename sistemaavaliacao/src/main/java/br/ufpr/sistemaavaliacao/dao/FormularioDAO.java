@@ -33,13 +33,11 @@ public class FormularioDAO {
             while (result.next()) {
 
                 Formulario form = new Formulario(
-                    result.getString("titulo"),
-                    result.getBoolean("is_anonimo")
-                );
+                        result.getString("titulo"),
+                        result.getBoolean("is_anonimo"));
 
                 form.setId(result.getInt("id"));
                 form.setInstrucoes(result.getString("instrucoes"));
-            
 
                 formularios.add(form);
             }
@@ -48,7 +46,7 @@ public class FormularioDAO {
         return formularios;
     }
 
-        // No FormularioDAO.java
+    // No FormularioDAO.java
     public Formulario buscarPorIdCompleto(int id) throws SQLException {
         String sql = "SELECT * FROM formularios WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -59,14 +57,13 @@ public class FormularioDAO {
                     f.setId(rs.getInt("id"));
                     f.setInstrucoes(rs.getString("instrucoes"));
                     // Reusa seu método existente que já busca questões e alternativas
-                    f.setQuestoes(listarQuestoesPorFormulario(f.getId())); 
+                    f.setQuestoes(listarQuestoesPorFormulario(f.getId()));
                     return f;
                 }
             }
         }
         return null;
     }
-
 
     public List<Formulario> listarTodosSemProcesso() throws SQLException {
 
@@ -234,12 +231,27 @@ public class FormularioDAO {
 
                     // AQUI ESTÁ A MÁGICA: Já busca as questões deste formulário
                     f.setQuestoes(listarQuestoesPorFormulario(f.getId()));
+                    f.setQuantidadeRespostas(contarRespostasDoFormulario(f.getId()));
 
                     formularios.add(f);
                 }
             }
         }
         return formularios;
+    }
+
+    // Crie este método auxiliar na mesma classe DAO
+    private int contarRespostasDoFormulario(int formId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM avaliacoes WHERE formulario_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, formId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        }
+        return 0;
     }
 
     // Método auxiliar para buscar questões e suas alternativas
@@ -308,10 +320,10 @@ public class FormularioDAO {
                 while (rs.next()) {
                     // 1. Cria o objeto com texto e peso
                     Alternativa alt = new Alternativa(rs.getString("texto"), rs.getInt("peso"));
-                    
+
                     // 2. IMPORTANTE: Recupera e Seta o ID que vem do banco!
-                    alt.setId(rs.getInt("id")); 
-                    
+                    alt.setId(rs.getInt("id"));
+
                     // 3. Adiciona na lista
                     alts.add(alt);
                 }

@@ -33,7 +33,7 @@ public class FinalizarProcessoServlet extends HttpServlet {
             session.removeAttribute("processoEmAndamento");
             
             // Manda para a listagem geral
-            response.sendRedirect("jsp/coordenador/processos-avaliativos.jsp?msg=ProcessoCriadoComSucesso");
+            response.sendRedirect("/ListarProcessosServlet");
             
         } catch (SQLException e) {
              e.printStackTrace();

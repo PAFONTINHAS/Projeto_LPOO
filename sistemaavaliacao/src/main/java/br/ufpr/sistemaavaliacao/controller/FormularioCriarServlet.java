@@ -65,7 +65,7 @@ public class FormularioCriarServlet extends HttpServlet {
             FormularioDAO dao = new FormularioDAO(conexao);
             dao.salvar(formulario);
 
-            response.sendRedirect("jsp/aluno/home.jsp");
+            response.sendRedirect("jsp/coordenador/home.jsp");
 
         } catch (SQLException e) {
             e.printStackTrace();

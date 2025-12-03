@@ -36,12 +36,12 @@ public class FiltrarTurmasServlet extends HttpServlet{
             request.setAttribute("disciplinas", disciplinasFiltradas);
             request.setAttribute("cursosSelecionados", nomesCursos);
 
-            request.getRequestDispatcher("/jsp/coordenador/novo-processo3.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/coordenador/novo_processo3.jsp").forward(request, response);
         } catch(SQLException e){
 
             e.printStackTrace();
             String msg = java.net.URLEncoder.encode(e.getMessage(), "UTF-8");
-            response.sendRedirect("jsp/coordenador/novo-processo2.jsp?erro=" + msg);
+            response.sendRedirect("jsp/coordenador/novo_processo2.jsp?erro=" + msg);
         }
     }
 }
